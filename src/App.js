@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
-import MyPieChart from "./mycomponents/MyPieChart";
+//import MyPieChart from "./mycomponents/MyPieChart";
+import MyBarChart from "./mycomponents/MyBarChart";
 
 class App extends Component {
   state = {
     Co2Emission: [],
     indexYear1: 0,
     indexYear2: 0,
-    indexYear3: 0
+    indexYear3: 0,
+    indexYear4: 0
   };
 
   async componentDidMount() {
@@ -25,14 +27,17 @@ class App extends Component {
     );
     if (index !== -1) {
       switch (chartName) {
-        case "Pie1":
+        case "Bar1":
           this.setState({ indexYear1: index });
           break;
-        case "Pie2":
+        case "Bar2":
           this.setState({ indexYear2: index });
           break;
-        case "Pie3":
+        case "Bar3":
           this.setState({ indexYear3: index });
+          break;
+        case "Bar4":
+          this.setState({ indexYear4: index });
           break;
       }
     } else {
@@ -43,19 +48,24 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Global CO2 Emission</h1>
-        <MyPieChart
-          chartName="Pie1"
+        <MyBarChart
+          chartName="Bar1"
           Co2Emission={this.state.Co2Emission[this.state.indexYear1]}
           onYearFilter={this.handleYearFilter}
         />
-        <MyPieChart
-          chartName="Pie2"
+        <MyBarChart
+          chartName="Bar2"
           Co2Emission={this.state.Co2Emission[this.state.indexYear2]}
           onYearFilter={this.handleYearFilter}
         />
-        <MyPieChart
-          chartName="Pie3"
+        <MyBarChart
+          chartName="Bar3"
           Co2Emission={this.state.Co2Emission[this.state.indexYear3]}
+          onYearFilter={this.handleYearFilter}
+        />
+        <MyBarChart
+          chartName="Bar4"
+          Co2Emission={this.state.Co2Emission[this.state.indexYear4]}
           onYearFilter={this.handleYearFilter}
         />
       </div>
